@@ -1,2 +1,23 @@
 <project name="cdkfx2" basedir="." default="build" >
+<property name="host.installed"        value="${basedir}/host.installed" />
+<property name="sdcc.source.dir"       value="${basedir}/sdcc/sdcc" />
+
+<target name="clean">
+<delete dir="${host.installed}" />
+</target>
+
+<target name="bootstrap">
+<exec failonerror="true" executable="./configure" dir="${sdcc.source.dir}" />
+   <arg value="--prefix=${host.installed}/sdcc" />
+</exec>
+
+<exec failonerror="true" executable="make" dir="${sdcc.source.dir}" />
+   <arg value="install" />
+   <arg value="-j8" />
+</exec>
+</target>
+
+<target name="build">
+</target>
+
 </project>
