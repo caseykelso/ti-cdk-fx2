@@ -17,8 +17,11 @@ repo sync
 ant bootstrap
 ```
 
-# Build FX2 Firmware
+# Build FX2LIB Reference Firmware
 ```bash
 ant build
 ```
+
+The reference fx2lib build artifact lives in fx2lib/fw/build.
+
 

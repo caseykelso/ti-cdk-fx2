@@ -37,18 +37,18 @@
   <arg value="all" />
 </exec>
 </target>
-
+<!--
 <target name="firmware">
 <exec executable="make" dir="${firmware.source.dir}">
   <env key="PATH"    value="${env.PATH}:${sdcc.install.dir}/bin" />
   <env key="VERBOSE" value="1" />
 </exec>
 </target>
-
-<target name="bootstrap" depends="sdcc, fx2lib">
+-->
+<target name="bootstrap" depends="sdcc">
 </target>
 
-<target name="build" depends="firmware">
+<target name="build" depends="fx2lib">
 </target>
 
 
