@@ -3,7 +3,7 @@ TI CDK FX2 Firmware - top level project
 
 # Setup Environment (Ubuntu 17.04)
 ```bash
-sudo apt-get install build-essential repo ant git
+sudo apt-get install build-essential repo ant git libboost-graph-dev
 ```
 
 # Get the source
@@ -21,3 +21,4 @@ ant bootstrap
 ```bash
 ant build
 ```
+

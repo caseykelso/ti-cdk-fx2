@@ -1,7 +1,7 @@
 <project name="cdkfx2" basedir="." default="build" >
 <property name="host.installed"        value="${basedir}/host.installed" />
 <property name="target.installed"      value="${basedir}/target.installed" />
-<property name="sdcc.source.dir"       value="${basedir}/sdcc/sdcc" />
+<property name="sdcc.source.dir"       value="${basedir}/sdcc" />
 <property name="sdcc.install.dir"      value="${host.installed}/sdcc" />
 <property name="firmware.source.dir"   value="${basedir}/firmware/OPT8241-FX2-reference-FW/fw" />
 <property name="fx2lib.source.dir"     value="${basedir}/firmware/OPT8241-FX2-reference-FW" />
@@ -16,13 +16,25 @@
 
 <target name="sdcc">
 <delete dir="${sdcc.install.dir}" />
-<exec failonerror="true" executable="./configure" dir="${sdcc.source.dir}">
+<exec failonerror="true" executable="./configure" dir="${sdcc.source.dir}/sdcc">
    <arg value="--prefix=${sdcc.install.dir}" />
 </exec>
 
-<exec failonerror="true" executable="make" dir="${sdcc.source.dir}">
+<exec failonerror="true" executable="make" dir="${sdcc.source.dir}/sdcc">
    <arg value="-j8" />
+   <arg value="install" />
 </exec> 
+
+<exec failonerror="true" executable="./configure" dir="${sdcc.source.dir}/sdcc-extra">
+   <arg value="--prefix=${sdcc.install.dir}" />
+</exec>
+
+<exec failonerror="true" executable="make" dir="${sdcc.source.dir}/sdcc-extra">
+   <arg value="-j8" />
+   <arg value="install" />
+</exec> 
+
+
 </target>
 
 <target name="fx2lib">
