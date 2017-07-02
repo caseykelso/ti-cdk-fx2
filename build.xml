@@ -46,4 +46,21 @@
 <target name="build" depends="firmware">
 </target>
 
+<target name="libusb">
+<delete dir="${libusb.install.dir}" />
+<exec failonerror="true" executable="./configure" dir="${libusb.source.dir}">
+   <arg value="--prefix=${libusb.install.dir}" />
+</exec>
+
+<exec failonerror="true" executable="./bootstrap.sh" dir="${libusb.source.dir}">
+</exec> 
+
+<exec failonerror="true" executable="make" dir="${libusb.source.dir}">
+   <arg value="-j8" />
+   <arg value="install" />
+</exec> 
+</target>
+
+
+
 </project>
