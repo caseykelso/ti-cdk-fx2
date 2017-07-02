@@ -8,6 +8,6 @@
 
    <project name="3dtof/fx2-reference-firmware"              remote="github"      path="firmware"  revision="master" />
    <project name="caseykelso/ti-cdk-fx2"                     remote="github"      path="."         revision="master" />
-   <project name="djmuhlestein/fx2lib"                       remote="github"      path="fx2lib"    revision="0.2" />
+   <project name="djmuhlestein/fx2lib"                       remote="github"      path="fx2lib"    revision="refs/tags/0.2" />
    <project name="sdcc/code/sdcc-linux-x86"                  remote="sourceforge" path="sdcc"      revision="sdcc-290" />
 </manifest>
