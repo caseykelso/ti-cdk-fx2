@@ -4,4 +4,5 @@
            fetch="git://github.com" />
 
    <project name="3dtof/fx2-reference-firmware"              remote="github"      path="firmware"  revision="master" />
+   <project name="caseykelso/ti-cdk-fx2"                     remote="."           path="."         revision="master" />
 </manifest>
