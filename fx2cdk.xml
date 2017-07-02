@@ -3,5 +3,5 @@
    <remote name="github"
            fetch="git://github.com" />
 
-   <project name="3dtof/fx2-reference-firmware"              remote="github"      path="firmware" />
+   <project name="3dtof/fx2-reference-firmware"              remote="github"      path="firmware"  revision="master" />
 </manifest>
