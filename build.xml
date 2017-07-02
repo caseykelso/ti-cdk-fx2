@@ -2,7 +2,10 @@
 <property name="host.installed"        value="${basedir}/host.installed" />
 <property name="sdcc.source.dir"       value="${basedir}/sdcc/sdcc" />
 <property name="sdcc.install.dir"      value="${host.installed}/sdcc" />
-<property name="firmware.source.dir"   value="${basedir}/firmware/OPT8241-FX2-reference-FW" />
+<property name="firmware.source.dir"   value="${basedir}/firmware/OPT8241-FX2-reference-FW/fw" />
+<property name="fx2lib.source.dir"     value="${basedir}/firmware/OPT8241-FX2-reference-FW" />
+
+
 <property environment="env" />
 
 <target name="clean">
@@ -20,13 +23,20 @@
 </exec> 
 </target>
 
+<target name="fx2lib">
+<exec executable="make" dir="${fx2lib.source.dir}">
+  <env key="PATH"  value="${env.PATH}:${sdcc.install.dir}/bin" />
+  <arg value="all" />
+</exec>
+</target>
+
 <target name="firmware">
 <exec executable="make" dir="${firmware.source.dir}">
   <env key="PATH"  value="${env.PATH}:${sdcc.install.dir}/bin" />
 </exec>
 </target>
 
-<target name="bootstrap" depends="sdcc">
+<target name="bootstrap" depends="sdcc, fx2lib">
 </target>
 
 <target name="build" depends="firmware">
