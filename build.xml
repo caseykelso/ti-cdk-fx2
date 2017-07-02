@@ -3,9 +3,9 @@
 <property name="target.installed"      value="${basedir}/target.installed" />
 <property name="sdcc.source.dir"       value="${basedir}/sdcc" />
 <property name="sdcc.install.dir"      value="${host.installed}/sdcc" />
-<property name="firmware.source.dir"   value="${basedir}/firmware/OPT8241-FX2-reference-FW/fw" />
-<property name="fx2lib.source.dir"     value="${basedir}/firmware/OPT8241-FX2-reference-FW" />
-
+<property name="firmware.source.dir"   value="${basedir}/firmware/OPT8241-FX2-reference-FW" />
+<property name="fx2lib.source.dir"     value="${basedir}/fx2lib" />
+<property name="libusb.source.dir"     value="${basedir}/libusb" />
 
 <property environment="env" />
 
