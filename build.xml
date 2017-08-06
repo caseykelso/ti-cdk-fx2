@@ -41,6 +41,13 @@
 </target>
 
 <target name="firmware">
+<!--
+<exec executable="make" dir="${firmware.source.dir}">
+  <env key="PATH"        value="${env.PATH}:${sdcc.install.dir}/bin" />
+  <env key="VERBOSE"     value="1" />
+  <arg value="clean" />
+</exec>
+-->
 
 <exec executable="make" dir="${firmware.source.dir}">
   <env key="PATH"        value="${env.PATH}:${sdcc.install.dir}/bin" />

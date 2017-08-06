@@ -4,3 +4,5 @@ firmware/
 fx2lib/
 sdcc/
 libusb/
+tags
+.ant-targets-build.xml
