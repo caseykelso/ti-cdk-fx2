@@ -8,6 +8,8 @@
 <property name="libusb.source.dir"     value="${basedir}/libusb" />
 <property name="firmware.source.dir"   value="${basedir}/firmware/src" />
 <property name="firmware.include.dir"  value="${basedir}/firmware/include" />
+<property name="hex2bix.source.dir"    value="${basedir}/hex2bix" />
+<property name="hex2bix.bin"           value="${basedir}/hex2bix/hex2bix" />
 
 <property environment="env" />
 
@@ -40,6 +42,15 @@
 </exec>
 </target>
 
+<target name="hex2bix">
+<exec executable="make" dir="${hex2bix.source.dir}">
+  <arg value="all" />
+</exec>
+
+</target>
+
+
+
 <target name="firmware">
 <!--
 <exec executable="make" dir="${firmware.source.dir}">
@@ -54,6 +65,7 @@
   <env key="FX2_DIR"     value="${fx2lib.source.dir}" />
   <env key="PROJ_DIR"    value="${firmware.source.dir}" />
   <env key="FX2_INC_DIR" value="${fx2lib.include.dir}" />  
+  <env key="HEX2BIX"     value="${hex2bix.bin}" />
   <env key="VERBOSE"     value="1" />
   <arg value="all" />
 </exec>
@@ -68,7 +80,7 @@
 </exec>
 </target>
 -->
-<target name="bootstrap" depends="sdcc">
+<target name="bootstrap" depends="sdcc, hex2bix">
 </target>
 
 <target name="build" depends="fx2lib">

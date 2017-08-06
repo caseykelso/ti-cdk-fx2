@@ -6,3 +6,4 @@ sdcc/
 libusb/
 tags
 .ant-targets-build.xml
+hex2bix/
