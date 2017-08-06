@@ -10,12 +10,36 @@
 <property name="firmware.include.dir"  value="${basedir}/firmware/include" />
 <property name="hex2bix.source.dir"    value="${basedir}/hex2bix" />
 <property name="hex2bix.bin"           value="${basedir}/hex2bix/hex2bix" />
+<property name="docopt.build"             value="${basedir}/build.docopt" />
+<property name="docopt.dir"               value="${basedir}/docopt" />
+
 
 <property environment="env" />
 
 <target name="clean">
 <delete dir="${host.installed}" />
 <delete dir="${target.installed}" />
+</target>
+
+
+<target name="docopt">
+  <delete dir="${docopt.build}" />
+  <mkdir  dir="${docopt.build}" />
+
+  <exec executable="cmake" dir="${docopt.build}" failonerror="true" >
+    <arg value="-DCMAKE_INSTALL_PREFIX=${host.installed}" />
+    <arg value="-DCMAKE_BUILD_TYPE=Debug" />
+    <arg value="-DCMAKE_INCLUDE_PATH=${host.installed}/include" />
+    <arg value="-DCMAKE_LIBRARY_PATH=${host.installed}/lib" />
+    <arg value="${docopt.dir}" />
+  </exec>
+
+  <exec executable="make" dir="${docopt.build}" failonerror="true">
+  </exec>
+
+  <exec executable="make" dir="${docopt.build}" failonerror="true">
+    <arg value="install" />
+  </exec>
 </target>
 
 <target name="sdcc">
@@ -44,9 +68,12 @@
 
 <target name="hex2bix">
 <exec executable="make" dir="${hex2bix.source.dir}">
-  <arg value="all" />
+  <arg value="clean" />
 </exec>
 
+<exec executable="make" dir="${hex2bix.source.dir}">
+  <arg value="all" />
+</exec>
 </target>
 
 
@@ -80,7 +107,7 @@
 </exec>
 </target>
 -->
-<target name="bootstrap" depends="sdcc, hex2bix">
+<target name="bootstrap" depends="sdcc, docopt, hex2bix">
 </target>
 
 <target name="build" depends="fx2lib">
