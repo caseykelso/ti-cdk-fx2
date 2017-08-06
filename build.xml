@@ -3,9 +3,11 @@
 <property name="target.installed"      value="${basedir}/target.installed" />
 <property name="sdcc.source.dir"       value="${basedir}/sdcc" />
 <property name="sdcc.install.dir"      value="${host.installed}/sdcc" />
-<property name="firmware.source.dir"   value="${basedir}/firmware/OPT8241-FX2-reference-FW/fw" />
 <property name="fx2lib.source.dir"     value="${basedir}/fx2lib" />
+<property name="fx2lib.include.dir"    value="${basedir}/fx2lib/include" />
 <property name="libusb.source.dir"     value="${basedir}/libusb" />
+<property name="firmware.source.dir"   value="${basedir}/firmware/src" />
+<property name="firmware.include.dir"  value="${basedir}/firmware/include" />
 
 <property environment="env" />
 
@@ -37,6 +39,20 @@
   <arg value="all" />
 </exec>
 </target>
+
+<target name="firmware">
+
+<exec executable="make" dir="${firmware.source.dir}">
+  <env key="PATH"        value="${env.PATH}:${sdcc.install.dir}/bin" />
+  <env key="FX2_DIR"     value="${fx2lib.source.dir}" />
+  <env key="PROJ_DIR"    value="${firmware.source.dir}" />
+  <env key="FX2_INC_DIR" value="${fx2lib.include.dir}" />  
+  <env key="VERBOSE"     value="1" />
+  <arg value="all" />
+</exec>
+
+</target>
+
 <!--
 <target name="firmware">
 <exec executable="make" dir="${firmware.source.dir}">
