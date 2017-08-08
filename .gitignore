@@ -7,3 +7,7 @@ libusb/
 tags
 .ant-targets-build.xml
 hex2bix/
+build.docopt/
+docopt/
+host.installed/
+
