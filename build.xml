@@ -10,8 +10,9 @@
 <property name="firmware.include.dir"  value="${basedir}/firmware/include" />
 <property name="hex2bix.source.dir"    value="${basedir}/hex2bix" />
 <property name="hex2bix.bin"           value="${basedir}/hex2bix/hex2bix" />
-<property name="docopt.build"             value="${basedir}/build.docopt" />
-<property name="docopt.dir"               value="${basedir}/docopt" />
+<property name="hex2bix.build"         value="${basedir}/build.hex2bix" />
+<property name="docopt.build"          value="${basedir}/build.docopt" />
+<property name="docopt.dir"            value="${basedir}/docopt" />
 
 
 <property environment="env" />
@@ -21,6 +22,28 @@
 <delete dir="${target.installed}" />
 </target>
 
+
+<target name="hex2bix">
+  <delete dir="${hex2bix.build}" />
+  <mkdir  dir="${hex2bix.build}" />
+
+  <exec executable="cmake" dir="${hex2bix.build}" failonerror="true" >
+    <arg value="-DCMAKE_INSTALL_PREFIX=${host.installed}" />
+    <arg value="-DCMAKE_BUILD_TYPE=Debug" />
+    <arg value="-DCMAKE_INCLUDE_PATH=${host.installed}/include" />
+    <arg value="-DCMAKE_LIBRARY_PATH=${host.installed}/lib" />
+    <arg value="-DINSTALL_DIR=${host.installed}" />
+    <arg value="${hex2bix.source.dir}" />
+  </exec>
+
+  <exec executable="make" dir="${hex2bix.build}" failonerror="true">
+   <env key="VERBOSE" value="1" />
+  </exec>
+
+  <exec executable="make" dir="${hex2bix.build}" failonerror="true">
+    <arg value="install" />
+  </exec> 
+</target>
 
 <target name="docopt">
   <delete dir="${docopt.build}" />
@@ -62,16 +85,6 @@
 
 <exec executable="make" dir="${fx2lib.source.dir}/fw">
   <env key="PATH"  value="${env.PATH}:${sdcc.install.dir}/bin" />
-  <arg value="all" />
-</exec>
-</target>
-
-<target name="hex2bix">
-<exec executable="make" dir="${hex2bix.source.dir}">
-  <arg value="clean" />
-</exec>
-
-<exec executable="make" dir="${hex2bix.source.dir}">
   <arg value="all" />
 </exec>
 </target>
