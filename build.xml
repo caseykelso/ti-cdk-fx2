@@ -8,6 +8,7 @@
 <property name="libusb.source.dir"     value="${basedir}/libusb" />
 <property name="firmware.source.dir"   value="${basedir}/firmware/src" />
 <property name="firmware.include.dir"  value="${basedir}/firmware/include" />
+<property name="firmware.build.dir"    value="${basedir}/build.firmware" />
 <property name="hex2bix.source.dir"    value="${basedir}/hex2bix" />
 <property name="hex2bix.bin"           value="${basedir}/hex2bix/hex2bix" />
 <property name="hex2bix.build"         value="${basedir}/build.hex2bix" />
@@ -87,13 +88,19 @@
   <env key="PATH"  value="${env.PATH}:${sdcc.install.dir}/bin" />
   <arg value="all" />
 </exec>
+
+<mkdir  dir="${target.installed}/lib" />
+<copy file="${fx2lib.source.dir}/lib/fx2.lib" todir="${target.installed}/lib" />
+
 </target>
 
 
 
 <target name="firmware">
-  <delete dir="${target.installed}" />
-  <mkdir  dir="${target.installed}/bin" />
+<!--  <delete dir="${target.installed}" />
+  <mkdir  dir="${target.installed}/bin" /> -->
+  <delete dir="${firmware.build.dir}" />
+  <mkdir  dir="${firmware.build.dir}" />
 <!--
 <exec executable="make" dir="${firmware.source.dir}">
   <env key="PATH"        value="${env.PATH}:${sdcc.install.dir}/bin" />
@@ -101,12 +108,18 @@
   <arg value="clean" />
 </exec>
 -->
-
+<!--
+<exec executable="make" dir="${firmware.source.dir}">
+  <arg value="clean" />
+  <env key="OUT_DIR"     value="${firmware.build.dir}" />
+</exec>
+-->
 <exec executable="make" dir="${firmware.source.dir}">
   <env key="PATH"        value="${env.PATH}:${sdcc.install.dir}/bin" />
-  <env key="FX2_DIR"     value="${fx2lib.source.dir}" />
+  <env key="FX2_DIR"     value="${target.installed}" />
   <env key="PROJ_DIR"    value="${firmware.source.dir}" />
   <env key="FX2_INC_DIR" value="${fx2lib.include.dir}" />  
+  <env key="OUT_DIR"     value="${firmware.build.dir}" />
   <env key="HEX2BIX"     value="${hex2bix.bin}" />
   <env key="VERBOSE"     value="1" />
   <arg value="all" />
@@ -133,10 +146,10 @@
 </exec>
 </target>
 -->
-<target name="bootstrap" depends="sdcc, docopt, hex2bix">
+<target name="bootstrap" depends="sdcc, docopt, hex2bix,fx2lib">
 </target>
 
-<target name="build" depends="fx2lib">
+<target name="build" depends="firmware">
 </target>
 
 

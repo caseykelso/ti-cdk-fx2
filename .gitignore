@@ -12,3 +12,5 @@ docopt/
 host.installed/
 build.hex2bix/
 target.installed/
+fx2tools/
+build.firmware/
